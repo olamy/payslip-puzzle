@@ -1,6 +1,8 @@
 package org.olamy.puzzle.payslip;
 
 import org.apache.commons.lang3.StringUtils;
+import org.olamy.puzzle.payslip.tax.TaxRange;
+import org.olamy.puzzle.payslip.tax.TaxRangeSearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

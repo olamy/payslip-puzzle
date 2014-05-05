@@ -1,5 +1,8 @@
 package org.olamy.puzzle.payslip;
 
+import org.olamy.puzzle.payslip.tax.TaxRange;
+import org.olamy.puzzle.payslip.tax.TaxRangeSearcher;
+
 import java.util.ArrayList;
 import java.util.List;
 

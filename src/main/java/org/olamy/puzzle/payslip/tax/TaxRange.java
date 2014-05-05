@@ -1,4 +1,4 @@
-package org.olamy.puzzle.payslip;
+package org.olamy.puzzle.payslip.tax;
 
 /**
  * <p>

@@ -1,4 +1,7 @@
-package org.olamy.puzzle.payslip;
+package org.olamy.puzzle.payslip.tax;
+
+import org.olamy.puzzle.payslip.DefaultTaxRangeSearcher;
+import org.olamy.puzzle.payslip.EmployeeData;
 
 /**
  * We define an interface for possible enhancement (coming from database or external services)
