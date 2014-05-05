@@ -1,5 +1,6 @@
-package org.olamy.puzzle.payslip;
+package org.olamy.puzzle.payslip.tax;
 
+import org.olamy.puzzle.payslip.EmployeeData;
 import org.olamy.puzzle.payslip.tax.TaxRange;
 import org.olamy.puzzle.payslip.tax.TaxRangeSearcher;
 
@@ -17,7 +18,7 @@ public class DefaultTaxRangeSearcher
 
     public DefaultTaxRangeSearcher()
     {
-        this.taxRanges = new ArrayList<TaxRange>( 5 );
+        this.taxRanges = new ArrayList<>( 5 );
 
         //Taxable income   Tax on this income
         //0 - $18,200     Nil

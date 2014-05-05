@@ -1,6 +1,5 @@
 package org.olamy.puzzle.payslip.tax;
 
-import org.olamy.puzzle.payslip.DefaultTaxRangeSearcher;
 import org.olamy.puzzle.payslip.EmployeeData;
 
 /**
