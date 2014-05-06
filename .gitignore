@@ -3,3 +3,4 @@ target/
 .idea
 out/
 .java-version
+dependency-reduced-pom.xml

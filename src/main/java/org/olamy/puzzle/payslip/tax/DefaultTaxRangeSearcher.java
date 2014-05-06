@@ -1,15 +1,17 @@
 package org.olamy.puzzle.payslip.tax;
 
 import org.olamy.puzzle.payslip.EmployeeData;
-import org.olamy.puzzle.payslip.tax.TaxRange;
-import org.olamy.puzzle.payslip.tax.TaxRangeSearcher;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Olivier Lamy
  */
+@Singleton
+@Named( "taxRangeSearcher#default" )
 public class DefaultTaxRangeSearcher
     implements TaxRangeSearcher
 {

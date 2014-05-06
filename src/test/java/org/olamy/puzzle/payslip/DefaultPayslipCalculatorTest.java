@@ -1,6 +1,10 @@
 package org.olamy.puzzle.payslip;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.Before;
 import org.junit.Test;
+import org.olamy.puzzle.payslip.output.PayslipResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +22,16 @@ public class DefaultPayslipCalculatorTest
 
     SimpleDateFormat sdf = new SimpleDateFormat( "dd MMM" );
 
-    PayslipCalculator payslipCalculator = new DefaultPayslipCalculator();
-
     final Logger logger = LoggerFactory.getLogger( getClass() );
+
+    PayslipCalculator payslipCalculator;
+
+    @Before
+    public void setup()
+    {
+        Injector injector = Guice.createInjector( new CsvFilePayslipProcessorModule() );
+        payslipCalculator = injector.getInstance( PayslipCalculator.class );
+    }
 
     @Test
     public void test_sample_data1()
@@ -138,7 +149,7 @@ public class DefaultPayslipCalculatorTest
     public void test_exception_with_null_employeeData()
         throws Exception
     {
-        payslipCalculator.calculate( null );
+        payslipCalculator.calculate( (EmployeeData) null );
     }
 
     @Test( expected = PayslipCalculatorException.class )

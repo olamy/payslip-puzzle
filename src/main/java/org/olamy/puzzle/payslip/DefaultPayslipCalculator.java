@@ -1,19 +1,51 @@
 package org.olamy.puzzle.payslip;
 
 import org.apache.commons.lang3.StringUtils;
+import org.olamy.puzzle.payslip.output.PayslipResult;
 import org.olamy.puzzle.payslip.tax.TaxRange;
 import org.olamy.puzzle.payslip.tax.TaxRangeSearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Olivier Lamy
  */
+@Singleton
+@Named( "payslipCalculator#default" )
 public class DefaultPayslipCalculator
     implements PayslipCalculator
 {
 
     private final Logger logger = LoggerFactory.getLogger( getClass() );
+
+    private TaxRangeSearcher taxRangeSearcher;
+
+    @Inject
+    public DefaultPayslipCalculator( TaxRangeSearcher taxRangeSearcher )
+    {
+        this.taxRangeSearcher = taxRangeSearcher;
+    }
+
+
+    @Override
+    public List<PayslipResult> calculate( List<EmployeeData> employeeDatas )
+        throws PayslipCalculatorException
+    {
+        List<PayslipResult> payslipResults = new ArrayList<>( employeeDatas.size() );
+
+        for ( EmployeeData employeeData : employeeDatas )
+        {
+            payslipResults.add( calculate( employeeData ) );
+        }
+
+        return payslipResults;
+    }
 
     @Override
     public PayslipResult calculate( EmployeeData employeeData )
@@ -22,7 +54,7 @@ public class DefaultPayslipCalculator
 
         validateEmployeeData( employeeData );
 
-        TaxRange taxRange = TaxRangeSearcher.INSTANCE.findTaxeRange( employeeData );
+        TaxRange taxRange = this.taxRangeSearcher.findTaxeRange( employeeData );
 
         if ( taxRange == null )
         {

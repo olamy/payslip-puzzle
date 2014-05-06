@@ -28,8 +28,25 @@ public class CsvFileEmployeeDataReaderTest
                                                                                        DateParser.INSTANCE.parseDateString(
                                                                                            "01 March" ), //
                                                                                        DateParser.INSTANCE.parseDateString(
-                                                                                           "31 March" ) ) );
+                                                                                           "31 March" )
+        ) );
 
+    }
+
+    @Test( expected = EmployeeDataReaderException.class )
+    public void parse_single_no_percentage()
+        throws Exception
+    {
+
+        csvFileEmployeeDataReader.parseFileLine( "David,Rudd,60050,9,01 March - 31 March", true );
+    }
+
+    @Test( expected = EmployeeDataReaderException.class )
+    public void parse_single_wrong_date()
+        throws Exception
+    {
+
+        csvFileEmployeeDataReader.parseFileLine( "David,Rudd,60050,9,01 March 31 March", true );
     }
 
     @Test

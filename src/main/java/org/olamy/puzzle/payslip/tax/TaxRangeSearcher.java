@@ -15,9 +15,4 @@ public interface TaxRangeSearcher
      */
     TaxRange findTaxeRange( EmployeeData employeeData );
 
-    /**
-     * for the purpose of this puzzle we use the one with hardcoded values
-     */
-    static final TaxRangeSearcher INSTANCE = new DefaultTaxRangeSearcher();
-
 }

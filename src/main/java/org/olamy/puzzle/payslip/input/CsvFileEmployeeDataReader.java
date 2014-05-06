@@ -6,6 +6,8 @@ import org.olamy.puzzle.payslip.EmployeeData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -19,6 +21,8 @@ import java.util.regex.Pattern;
 /**
  * @author Olivier Lamy
  */
+@Singleton
+@Named( "employeeDataReader#csvfile" )
 public class CsvFileEmployeeDataReader
     implements EmployeeDataReader
 {
@@ -88,6 +92,15 @@ public class CsvFileEmployeeDataReader
         // date entry is date1 - date2
         // so we split it
         int dateSeparatorIndex = datas[4].indexOf( '-' );
+        if ( dateSeparatorIndex < 0 )
+        {
+            if ( failOnInvalidData )
+            {
+                throw new EmployeeDataReaderException( "no valid data separator for dates: " + datas[4] );
+            }
+            logger.warn( "no valid data separator for dates: '{}'", datas[4] );
+            return null;
+        }
         String startDate = StringUtils.trim( datas[4].substring( 0, dateSeparatorIndex ) );
         String endDate = StringUtils.trim( datas[4].substring( dateSeparatorIndex + 1, datas[4].length() ) );
 
@@ -100,6 +113,7 @@ public class CsvFileEmployeeDataReader
                     "cannot extract super percentage value from string: " + datas[3] );
             }
             logger.warn( "cannot extract super percentage value from string: '{}'", datas[3] );
+            return null;
         }
 
         return new EmployeeData( StringUtils.trim( datas[0] ), //

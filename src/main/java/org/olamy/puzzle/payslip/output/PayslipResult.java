@@ -1,4 +1,6 @@
-package org.olamy.puzzle.payslip;
+package org.olamy.puzzle.payslip.output;
+
+import org.olamy.puzzle.payslip.EmployeeData;
 
 /**
  * Model for a payslip calculation result
